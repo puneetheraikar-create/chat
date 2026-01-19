@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internal Bug Assistant</title>
+<meta charset="UTF-8" />
+<style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background: #0f0f0f;
+
+      color: #eaeaea;
+
+      max-width: 600px;
+
+      margin: auto;
+
+      padding-top: 50px;
+
+    }
+
+    input, button {
+
+      width: 100%;
+
+      padding: 12px;
+
+      margin-top: 12px;
+
+      font-size: 16px;
+
+    }
+
+    button {
+
+      background: #2563eb;
+
+      color: white;
+
+      border: none;
+
+      cursor: pointer;
+
+    }
+
+    #reply {
+
+      margin-top: 20px;
+
+      background: #1e1e1e;
+
+      padding: 15px;
+
+      white-space: pre-wrap;
+
+    }
+</style>
+</head>
+<body>
+<h2>Internal Bug Assistant</h2>
+<input id="msg" placeholder="Ask about BugID, reporter, status..." />
+<button onclick="send()">Ask</button>
+<div id="reply"></div>
+<script>
+
+async function send() {
+
+  const message = document.getElementById("msg").value;
+
+  document.getElementById("reply").innerText = "Thinking...";
+
+  try {
+
+    const res = await fetch("https://puneetheraikar-ai.online/webhook/chat", {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type": "application/json",
+
+        "x-api-key": "zxcvbnm"
+
+      },
+
+      body: JSON.stringify({ message })
+
+    });
+
+    const data = await res.json();
+
+    document.getElementById("reply").innerText = data.reply || "No response";
+
+  } catch (err) {
+
+    document.getElementById("reply").innerText = "Network error";
+
+  }
+
+}
+</script>
+</body>
+</html>
+ 
